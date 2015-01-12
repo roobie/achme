@@ -24,6 +24,7 @@
       e.preventDefault();
 
       var sel = window.getSelection();
+      var word_under_cursor = getWordAtPoint(e.target, e.x, e.y);
 
       if (e.which === 2) {
         // "exec"
@@ -31,13 +32,16 @@
           if (sel.toString()) {
             text = sel.toString();
             sel.deleteFromDocument();
-            kill_ring.push(text);
             e.target.value = e.target.value.replace(text, '');
             // console.log('Current kill ring:', kill_ring);
           }
+        } else {
+          text = word_under_cursor;
+        }
+        if (!!text) {
+          kill_ring.push(text);
         }
       } else if (e.which === 3 && !active_btns[2]) {
-        var word_under_cursor = getWordAtPoint(e.target, e.x, e.y);
         text = sel.toString() ? sel.toString() : word_under_cursor;
         console.log('WORD:', text);
         window.find(text, true, false, true);
@@ -62,6 +66,9 @@
   });
 
   function insertAtCaret(element,text) {
+    if (!element || !text) {
+      return null;
+    }
     var scrollPos = element.scrollTop;
     var strPos = 0;
     var range;
