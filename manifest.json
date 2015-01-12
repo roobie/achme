@@ -1,0 +1,12 @@
+{
+  "name": "Achme: a mouse driven interface for Chrome",
+  "version": "0.1",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "js": ["contentscript.js"],
+      "matches": ["*://*/*"]
+    }
+  ],
+  "web_accessible_resources": ["achme.js"]
+}
