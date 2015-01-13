@@ -1,1 +1,0 @@
-* Add background script and message passing, so `kill_ring` can be "global"
