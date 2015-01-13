@@ -22,9 +22,7 @@
 
   document.addEventListener('mousedown', function(e) {
     var text;
-    // console.log('D:', e.which);
     if (e.which === 1) {
-      console.warn('CONTEXTMENU: OFF');
       window.oncontextmenu = oncontextmenu_disable;
     }
 
@@ -43,7 +41,6 @@
             text = sel.toString();
             sel.deleteFromDocument();
             e.target.value = e.target.value.replace(text, '');
-            // console.log('Current kill ring:', kill_ring);
           }
         } else {
           text = word_under_cursor;
@@ -56,7 +53,6 @@
         }
       } else if (e.which === 3 && !active_btns[2]) {
         text = sel.toString() ? sel.toString() : word_under_cursor;
-        // console.log('WORD:', text);
         window.find(text, true, false, true);
       } else if (e.which === 3 && active_btns[2]) {
         if (element_is_text_editable(e.target)) {
